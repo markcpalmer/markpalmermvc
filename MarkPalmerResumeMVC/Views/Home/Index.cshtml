@@ -1,0 +1,198 @@
+﻿@model IEnumerable<MarkPalmerResumeMVC.Models.ResumeObject>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    .responsiveImage {
+        max-width: 80%;
+        height: auto;
+    }
+
+    body {
+        font-family: Arial;
+    }
+
+    /* Style the tab */
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: #ddd;
+            }
+
+            /* Create an active/current tablink class */
+            .tab button.active {
+                background-color: #ccc;
+            }
+
+    /* Style the tab content */
+    .tabContent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    .sectionContent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+
+<script src="https://kit.fontawesome.com/cda72ff754.js"></script>
+<div class="jumbotron">
+    <img src="~/Images/computer2.jpg" max-height="50%" />
+</div>
+
+<button class="sectionLink" onclick="openSection(event,'AboutSection')">AboutSection</button>
+<button class="sectionLink" onclick="openSection(event,'ContactSection')">ContactSection</button>
+<button class="sectionLink" onclick="openSection(event,'SkillsSection')">SkillsSection</button>
+<button class="sectionLink" onclick="openSection(event,'ProjectSection')">ProjectSection</button>
+
+
+
+@* About Section *@
+<div id="AboutSection" class="sectionContent">
+    <b style="color: red">About Mark</b>
+    <br />
+    <span>
+        Information Technology professional with over 15 years of experience working with local and state educational agencies, rollouts for large and medium sized companies networks.
+        Diverse experience includes trouble shooting, programming, managing employees, developing marketing strategy, website design, and marketing. Top level time management skills and
+        orgranization; deadline oriented with the ability to operate within a budget. Skilled at multi-tasking. Comfortable working in a fast paced, ever-changing environment. Extremely
+        personable with strong customer focus. Extensive work as a collaborative team member.
+    </span>
+    <br />
+</div>
+
+@* Contact Info Section *@
+<div id="ContactSection" class="sectionContent">
+    <b style="color: red">Contact Info</b>
+    <br />
+    <span>
+        I would be happy to talk to you about how I can meet your needs! <br />
+        Email: Mark.Palmer@itsalllive.com <br />
+        Phone: (440) 935-9237
+    </span>
+    <br />
+</div>
+
+@* Skills Section *@
+<div id="SkillsSection" class="sectionContent">
+    <b style="color:red">Skills</b>
+    <br />
+    <div>
+        @foreach (var item in Model)
+        {
+            @Html.DisplayTextFor(modelItem => item.Description)
+            <span>•</span>
+        }
+    </div>
+</div>
+
+
+@* Projects Section*@
+<div id="ProjectSection" class="sectionContent">
+    <b style="color:red">Marks Projects</b>
+    <div class="tab">
+        <button class="tabLink" onclick="openProject(event,'Hospital')">Hospital</button>
+        <button class="tabLink" onclick="openProject(event,'Code Business')">Code Business</button>
+        <button class="tabLink" onclick="openProject(event,'Virtual Pet')">Virtual Pet</button>
+    </div>
+
+    <div id="Hospital" class="tabContent">
+        <img src="~/Images/hospitalProject.jpg" alt="hospital" class="responsiveImage" />
+    </div>
+    <div id="Code Business" class="tabContent">
+        <img src="~/Images/codebusiness.jpg" />
+    </div>
+
+    <div id="Virtual Pet" class="tabContent">
+        <img src="~/Images/virtualPet.jpg" />
+    </div>
+    <b style="color: red">Links to Mark's professional sites</b>
+
+    <div id="linksParagraph" class="row">
+        <div class="col-md-1 col-md-offset-1">
+            <a href="https://linkedin.com/in/mark-palmer-asp" target="_blank" /><i class="fab fa-linkedin fa-3x"></i>
+        </div>
+
+        <div class="col-md-1 col-md-offset-1">
+            <a href="https://github.com/markcpalmer" target="_blank" /><i class="fab fa-github fa-3x"></i>
+        </div>
+
+        <div class="col-md-1 col-md-offset-1">
+            <a href="mailto:Mark.Palmer@itsalllive.com" data-toggle="tooltip" data-placement="bottom" title="Mark.Palmer@itsalllive.com" /><i class="toolTip fas fa-envelope-square fa-3x"></i>
+        </div>
+        <div class="col-md-1 col-md-offset-1">
+            <a href="tel:440 935 9237" data-toggle="tooltip" data-placement="bottom" title="(440)935-9237" target="_blank">
+                <i class="toolTip fas fa-mobile-alt fa-3x"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function openProject(event, projectname) {
+        var i, tabContent, tabLinks;
+        tabContent = document.getElementsByClassName("tabContent");
+
+        // Clears display
+        for (i = 0; i < tabContent.length; i++) {
+            tabContent[i].style.display = "none";
+        }
+        tabLinks = document.getElementsByClassName("tabLink");
+
+        // Sets all classNames to their original className
+        for (i = 0; i < tabLinks.length; i++) {
+            tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+        }
+
+        // Displays the hidden Section by ElementID
+        document.getElementById(projectname).style.display = "block";
+
+        // Sets current (event) button's className to active
+        event.currentTarget.className += " active";
+    }
+
+    function openSection(event, sectionname) {
+        var i, sectionContent, sectionLink;
+        sectionContent = document.getElementsByClassName("sectionContent");
+
+        // Clears display
+        for (i = 0; i < sectionContent.length; i++) {
+            sectionContent[i].style.display = "none";
+        }
+        sectionLink = document.getElementsByClassName("sectionLink");
+
+        // Sets all classNames to their original className
+        for (i = 0; i < sectionLink.length; i++) {
+            sectionLink[i].className = sectionLink[i].className.replace(" active", "");
+        }
+
+        // Displays the hidden Section by ElementID
+        document.getElementById(sectionname).style.display = "block";
+
+        // Sets current (event) button's className to active
+        event.currentTarget.className += " active";
+    }
+
+</script>

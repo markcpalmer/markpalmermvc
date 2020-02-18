@@ -12,9 +12,9 @@ namespace MarkPalmerResumeMVC.Controllers
         public ActionResult Index()
         {
             List<ResumeObject> resume = new List<ResumeObject>();
-            using (ResumeObjectsDataContext dc= new ResumeObjectsDataContext())
+            using (ResumeObjectsDataContext dc= new ResumeObjectsDataContext())//opens connection to DB
             {
-                var query = dc.ResumeObjects.Select(a => a);
+                var query = dc.ResumeObjects.ToList();// select everything inside of ResumeObjects table and assigning it to query
                 foreach(var item in query)
                 {
                     resume.Add(item);
